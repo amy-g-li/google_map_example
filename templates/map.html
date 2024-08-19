@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>CRB Delineation Website!</title>  
+</head>
+
+<body>
+  {% if valid_island_template %}
+    <h1>This is a map for {{ island_name_template }}!</h1>
+  {% else %}
+    <h1>{{ island_name_template }} is not found!</h1>
+  {% endif %}
+
+  <div id="map"></div>
+
+  <script>
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+      ({key: "AIzaSyBdi7pCQMsjmvOlc-Sq1yO2dCkVOOOP6oM", v: "weekly"});
+  </script>
+
+
+  <style>
+    #map {
+      height: 100%;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+<script>
+const traps = [
+  {
+    name: "Trap #1: University of Hawaii",
+    coordinates: {
+      latitude: 21.2998,
+      longitude: -157.8148,
+    }
+  },
+  {
+    name: "Trap #2: Ala Moana",
+    coordinates: {
+      latitude: 21.291098,
+      longitude: -157.843643,
+    }
+  },
+  {
+    name: "Trap #3: Diamond Head",
+    coordinates: {
+      latitude: 21.2620,
+      longitude: -157.8060,
+    }
+  },
+]
+
+let map;
+
+async function initMap() {
+  const { Map } = await google.maps.importLibrary("maps"); 
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+  const honolulu = { lat: 21.315603, lng: -157.858093 };
+
+  map = new Map(document.getElementById("map"), {
+    zoom: 10,
+    center: honolulu,
+    mapId: "DEMO_MAP_ID",
+  });
+
+  for (let current_trap of traps) {
+    const current_marker = new AdvancedMarkerElement({
+      map: map,
+      position: {
+        lat: current_trap["coordinates"]["latitude"],
+        lng: current_trap["coordinates"]["longitude"],
+      }
+    });
+  }
+}
+
+initMap();
+
+</script>
+</body>
+</html>

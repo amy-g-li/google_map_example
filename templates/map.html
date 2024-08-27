@@ -7,7 +7,7 @@
 
 <body>
   {% if valid_island_template %}
-    <h1>This is a map for {{ island_name_template }}!</h1>
+    <h1>This is a map for {{ island_name_template | title }}!</h1>
   {% else %}
     <h1>{{ island_name_template }} is not found!</h1>
   {% endif %}

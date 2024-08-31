@@ -20,35 +20,35 @@
       ({key: "AIzaSyBdi7pCQMsjmvOlc-Sq1yO2dCkVOOOP6oM", v: "weekly"});
   </script>
 
-<script>
-async function initMap() {
-  const { Map } = await google.maps.importLibrary("maps"); 
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  <script>
+  async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps"); 
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  const honolulu = { lat: 21.315603, lng: -157.858093 };
-  const url = "/traps/?island=molokai";
-  const response = await fetch(url);
-  let traps = await response.json(); 
+    const honolulu = { lat: 21.315603, lng: -157.858093 };
+    const url = "/traps/?island=molokai";
+    const response = await fetch(url);
+    let traps = await response.json(); 
 
-  let map = new Map(document.getElementById("map"), {
-    zoom: 7,
-    center: honolulu,
-    mapId: "DEMO_MAP_ID",
-  });
-
-  for (let current_trap of traps) {
-    const current_marker = new AdvancedMarkerElement({
-      map: map,
-      position: {
-        lat: current_trap["coordinates"]["latitude"],
-        lng: current_trap["coordinates"]["longitude"],
-      }
+    let map = new Map(document.getElementById("map"), {
+      zoom: 7,
+      center: honolulu,
+      mapId: "DEMO_MAP_ID",
     });
+
+    for (let current_trap of traps) {
+      const current_marker = new AdvancedMarkerElement({
+        map: map,
+        position: {
+          lat: current_trap["coordinates"]["latitude"],
+          lng: current_trap["coordinates"]["longitude"],
+        }
+      });
+    }
   }
-}
 
-initMap();
+  initMap();
 
-</script>
+  </script>
 </body>
 </html>

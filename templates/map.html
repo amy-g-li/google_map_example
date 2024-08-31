@@ -26,9 +26,9 @@
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
     const honolulu = { lat: 21.315603, lng: -157.858093 };
-    const url = "/traps/?island=molokai";
+    const url = "/traps/?island={{island_name_template}}";
     const response = await fetch(url);
-    let traps = await response.json(); 
+    let traps = await response.json();
 
     let map = new Map(document.getElementById("map"), {
       zoom: 7,

@@ -3,13 +3,14 @@
 
 <head>
   <title>CRB Delineation Website!</title>  
+  <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}">
 </head>
 
 <body>
   {% if valid_island_template %}
-    <h1>This is a map for {{ island_name_template | title }}!</h1>
+  <h1 class="valid">This is a map for {{ island_name_template | title }}!</h1>  
   {% else %}
-    <h1>{{ island_name_template }} is not found!</h1>
+  <h1 class="invalid">{{ island_name_template }} is not found!</h1>
   {% endif %}
 
   <div id="map"></div>

@@ -33,40 +33,18 @@
   </style>
 
 <script>
-const traps = [
-  {
-    name: "Trap #1: University of Hawaii",
-    coordinates: {
-      latitude: 21.2998,
-      longitude: -157.8148,
-    }
-  },
-  {
-    name: "Trap #2: Ala Moana",
-    coordinates: {
-      latitude: 21.291098,
-      longitude: -157.843643,
-    }
-  },
-  {
-    name: "Trap #3: Diamond Head",
-    coordinates: {
-      latitude: 21.2620,
-      longitude: -157.8060,
-    }
-  },
-]
-
-let map;
 
 async function initMap() {
   const { Map } = await google.maps.importLibrary("maps"); 
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
   const honolulu = { lat: 21.315603, lng: -157.858093 };
+  const url = "/traps/?island=molokai";
+  const response = await fetch(url);
+  let traps = await response.json(); 
 
-  map = new Map(document.getElementById("map"), {
-    zoom: 10,
+  let map = new Map(document.getElementById("map"), {
+    zoom: 7,
     center: honolulu,
     mapId: "DEMO_MAP_ID",
   });

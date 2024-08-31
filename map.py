@@ -13,7 +13,7 @@ def maps():
       render_template(
         'map.html',
         valid_island_template=True,
-        island_name_template=island
+        island_name_template=island,
       )
     )
   else:

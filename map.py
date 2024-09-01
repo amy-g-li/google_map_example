@@ -8,23 +8,34 @@ app = Flask(__name__)
 def maps():
   island = request.args.get('island')
   vaild_islands = ["oahu", "kauai", "maui", "big_island","molokai"]
-  if island in vaild_islands:
-    return(
-      render_template(
-        'map.html',
-        valid_island_template=True,
-        island_name_template=island,
-      )
-    )
+  if island == "oahu":
+    island_center = { "latitude": 21.4389, "longitude": -158.0001}
+    valid_island=True
+  elif island == "kauai":
+    island_center = { "latitude": 22.0964, "longitude": -159.5261}
+    valid_island=True
+  elif island == "maui":
+    island_center = { "latitude": 20.7984, "longitude": -156.3319}
+    valid_island=True
+  elif island == "big_island":
+    island_center = {"latitude": 19.5429, "longitude": -155.6659}
+    valid_island=True
+  elif island == "molokai":
+    island_center = {"latitude": 21.1444, "longitude": -157.0226}
+    valid_island=True
   else:
-    return(
+    island_center = { "latitude": 21.4389, "longitude": -158.0001}
+    valid_island=False
+
+  return(
       render_template(
         'map.html',
-        valid_island_template=False,
-        island_name_template=island
+        valid_island_template=valid_island,
+        island_name_template=island,
+        island_center_template = island_center,
       )
     )
-  
+
 # /traps/
 # /traps/?island=oahu
 @app.route('/traps/')
@@ -82,4 +93,4 @@ def traps():
     locations = []
 
   return locations
-# BYE BYE SEE YOU IN ANOTHER LIFE 
+# BYE BYE SEE YOU AGAIN
